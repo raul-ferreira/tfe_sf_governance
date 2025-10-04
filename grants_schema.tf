@@ -10,7 +10,7 @@ resource "snowflake_grant_privileges_to_account_role" "sysadmin_usage_on_schema"
 
 # Grant usage on the schema
 resource "snowflake_grant_privileges_to_account_role" "grant_usage_tf_db_tf_schema_to_tf_role" {
-    provider          = snowflake
+    provider          = snowflake.sysadmin
     privileges        = ["USAGE"]
     account_role_name = snowflake_account_role.tf_role.name
     on_schema {
@@ -21,7 +21,7 @@ resource "snowflake_grant_privileges_to_account_role" "grant_usage_tf_db_tf_sche
 
 # Grant select on all tables in the schema (even if the schema is empty)
 resource "snowflake_grant_privileges_to_account_role" "grant_all_tables" {
-    provider          = snowflake
+    provider          = snowflake.sysadmin
     privileges        = ["SELECT"]
     account_role_name = snowflake_account_role.tf_role.name
     on_schema_object {
